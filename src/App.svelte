@@ -4,6 +4,7 @@
 	import Purchase from './purchase.svelte'
 	let title = '';
 	let pages = 0;
+	let price = 0;
 	let description = '';
 
 	let books =[];
@@ -15,12 +16,14 @@
 
 	function addBook(){
 		const newBook = {
-			title : title,
-			pages : pages,
-			description: description
-
+			title,
+			pages,
+			description,
+			price
 		};
 		books = books.concat(newBook)
+		
+		title = pages = description = ''
 	}
 
 	function purchaseBook(event){
@@ -28,6 +31,12 @@
 		purchases = purchases.concat({
 			...books.find(book => book.title === selectedTitle)
 		});
+	}
+
+
+	function removeBook(event){
+		const selectedTitle= event.detail;
+		books = books.filter(book => book.title !== selectedTitle);
 	}
 
 </script>
@@ -58,6 +67,11 @@
 		<input type="number" id="price" value={pages} bind:value={pages}/>
 	</div>
 
+		<div>
+		<label for="price"> price</label>
+		<input type="number" id="price" value={price} bind:value={price}/>
+	</div>
+
 	<div>
 		<label for="description">Description</label>
 		<textarea rows="3" id="description" bind:value ={description}/>
@@ -74,10 +88,9 @@
 	</p>
 	{:else}
 	{#each books as book}
-		<Book bookTitle={book.title} 
-		bookPages={book.pages} 
-		bookDescription={book.description}
+		<Book details={book} 
 		on:buy={purchaseBook}
+		on:remove={removeBook}
 		/>
 	{/each}
 {/if}

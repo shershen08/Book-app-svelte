@@ -1,13 +1,13 @@
 <script>
     import {createEventDispatcher} from 'svelte'
     import Button from './button.svelte'
-    export let bookTitle;
-    export let bookPages;
-    export let bookDescription;
-
+    export let details;
     const dispatch =  createEventDispatcher()
     function purchaseBook(){
-        dispatch('buy', bookTitle)
+        dispatch('buy', details.title)
+    }
+     function removeBook(){
+        dispatch('remove', details.title)
     }
 
 </script>
@@ -38,9 +38,11 @@
 
 
 <div>
-    <h1> {bookTitle} </h1>
-    <h2> {bookPages}</h2>
-    <p> {bookDescription}</p>
+    <h1> {details.title} </h1>
+    <h2> {details.pages}</h2>
+    <h2> {details.price}</h2>
+    <p> {details.description}</p>
     <Button on:click={purchaseBook}>Buy</Button>
+    <Button on:click={removeBook}>remove</Button>
 
 </div>
