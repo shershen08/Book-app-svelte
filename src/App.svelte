@@ -1,45 +1,25 @@
 <script>
-	import Book from './book.svelte'
-	import Button from './button.svelte'
-	import Purchase from './purchase.svelte'
-	let title = '';
-	let pages = 0;
-	let price = 0;
-	let description = '';
+  import { Router, Link, Route } from "svelte-routing";
+  import Books from "./pages/Books.svelte";
+  import About from "./pages/About.svelte";
+  import User from "./pages/User.svelte";
 
-	let books =[];
-	let purchases = [];
-
-	function setTitle(event){
-		title = event.target.value;
-	}
-
-	function addBook(){
-		const newBook = {
-			title,
-			pages,
-			description,
-			price
-		};
-		books = books.concat(newBook)
-		
-		title = pages = description = ''
-	}
-
-	function purchaseBook(event){
-		const selectedTitle= event.detail;
-		purchases = purchases.concat({
-			...books.find(book => book.title === selectedTitle)
-		});
-	}
-
-
-	function removeBook(event){
-		const selectedTitle= event.detail;
-		books = books.filter(book => book.title !== selectedTitle);
-	}
-
+  export let url = "";
+	
 </script>
+
+<Router url="{url}">
+  <nav>
+    <Link to="/">Books</Link>
+    <Link to="about">About</Link>
+    <Link to="user">Blog</Link>
+  </nav>
+  <div>
+    <Route path="about" component="{About}" />
+    <Route path="user" component="{User}" />
+    <Route path="/"><Books /></Route>
+  </div>
+</Router>
 
 <style>
 	h1 {
@@ -55,51 +35,3 @@
 
 	label,input,textarea{width: 100%}
 </style>
-
-<section>
-	<div> 
-		<label for="title">Title</label>
-		<input type="text" id="title" value={title} on:input={setTitle}/>
-	</div>
-
-	<div>
-		<label for="pages"> pages</label>
-		<input type="number" id="price" value={pages} bind:value={pages}/>
-	</div>
-
-		<div>
-		<label for="price"> price</label>
-		<input type="number" id="price" value={price} bind:value={price}/>
-	</div>
-
-	<div>
-		<label for="description">Description</label>
-		<textarea rows="3" id="description" bind:value ={description}/>
-	</div>
-
-	<Button on:click={addBook}>ADD Book</Button>
-
-</section>
-
-<section>
-{#if books.length === 0}
-	<p>
-	   Add a new book 
-	</p>
-	{:else}
-	{#each books as book}
-		<Book details={book} 
-		on:buy={purchaseBook}
-		on:remove={removeBook}
-		/>
-	{/each}
-{/if}
-
-</section>
-
-<hr>
-
-<section>
-	<Purchase books ={purchases}  /> 
-</section>
-
