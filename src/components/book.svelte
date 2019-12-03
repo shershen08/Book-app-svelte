@@ -1,5 +1,5 @@
 <script>
-    import {createEventDispatcher} from 'svelte'
+    import {createEventDispatcher, onMount, beforeUpdate, afterUpdate, onDestroy} from 'svelte'
     import Button from './button.svelte'
     export let details;
     const dispatch =  createEventDispatcher()
@@ -9,6 +9,19 @@
      function removeBook(){
         dispatch('remove', details.title)
     }
+
+    onMount(() => {
+        console.log('onMount');
+    });
+    beforeUpdate(() => {
+        console.log('beforeUpdate');
+    });
+    afterUpdate(() => {
+        console.log('afterUpdate');
+    });
+     onDestroy(() => {
+        console.log('onDestroy');
+    });
 
 </script>
 

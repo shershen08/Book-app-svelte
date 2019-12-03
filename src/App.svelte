@@ -3,6 +3,7 @@
   import Books from "./pages/Books.svelte";
   import About from "./pages/About.svelte";
   import User from "./pages/User.svelte";
+  import Grid from "./pages/Grid.svelte";
 
   export let url = "";
 	
@@ -13,11 +14,12 @@
     <Link to="/">Books</Link>
     <Link to="about">About</Link>
     <Link to="user">Blog</Link>
-    <h1>dfghjkl</h1>
+    <Link to="grid">Grid</Link>
   </nav>
   <div>
     <Route path="about" component="{About}" />
     <Route path="user" component="{User}" />
+    <Route path="grid" component="{Grid}" />
     <Route path="/"><Books /></Route>
   </div>
 </Router>
@@ -28,7 +30,7 @@ $darkGray: #333;
 // @import './common.sccss';
 
 nav {
-  background: blue;
+  background: #f1f1f1;
   
   a {
     color: $white;
