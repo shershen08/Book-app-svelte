@@ -12,7 +12,8 @@
 
 </script>
 
-<style>
+<style lang="scss">
+$aqua: aqua;
     div{
         margin: 1rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26)
@@ -26,7 +27,7 @@
     h2{
         font-size: 1rem;
         margin: 0.25rem 0;
-        color: aqua;
+        color:$aqua;
     }
 
     p{

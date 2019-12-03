@@ -13,6 +13,7 @@
     <Link to="/">Books</Link>
     <Link to="about">About</Link>
     <Link to="user">Blog</Link>
+    <h1>dfghjkl</h1>
   </nav>
   <div>
     <Route path="about" component="{About}" />
@@ -21,17 +22,35 @@
   </div>
 </Router>
 
-<style>
-	h1 {
-		color: purple;
-		
-	}
+<style lang="scss">
+$white: #fff;
+$darkGray: #333;
+// @import './common.sccss';
 
-	section{
-		margin: auto;
-		width :30rem;
-		
-	}
+nav {
+  background: blue;
+  
+  a {
+    color: $white;
+  }
 
-	label,input,textarea{width: 100%}
+  h1 {
+      color:$white;
+
+  }
+}
+
+  h1 {
+      color:$darkGray;
+      
+  }
+
+
+section{
+    margin: auto;
+    width :30rem;
+    
+}
+
+label,input,textarea{width: 100%}
 </style>
