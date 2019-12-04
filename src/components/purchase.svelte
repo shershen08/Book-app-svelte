@@ -1,6 +1,6 @@
 <script>
     export let books;
-
+    $: summ = books.reduce((a,b) => a + b.price, 0);
 </script>
 
 
@@ -18,10 +18,14 @@
 
 </style>
 
-<ul>
-    {#each books as book}
-    <li> {book.title} - {book.page}</li>
-    {/each}
-</ul>
+{#if books.length !== 0}
+    <h2> Cart </h2>
+    <ul>
+        {#each books as book}
+            <li> <strong>{book.title}</strong> / {book.price} $</li>
+        {/each}
+    </ul>
 
-<h1> Total : #... </h1>
+    <h2> Total </h2>
+    <p>{books.length} books for {summ}$</p>
+{/if}

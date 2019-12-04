@@ -7,12 +7,16 @@
         cursor: pointer;
         color: white;
     }
-
+button:disabled {
+    background-color: #ccc;
+}
 
 </style>
 
+<script>
+   export let isDisabled = false;
+</script>
 
-
-<button on:click >
+<button on:click disabled={isDisabled}>
     <slot/>
 </button>
